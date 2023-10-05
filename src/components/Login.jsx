@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import axios from '../api/axios';
 
@@ -7,11 +7,7 @@ const LOGIN_URL = '/auth';
 
 const Login = () => {
   const history = useHistory();
-  const location = useLocation();
   const { setAuth } = useAuth();
-
-  // Use location state or default to '/'
-  const from = location.state?.from || { pathname: '/' };
 
   const userRef = useRef();
   const errRef = useRef();
@@ -48,7 +44,7 @@ const Login = () => {
       setPwd('');
 
       // Redirect to the 'from' location after successful login
-      history.replace(from);
+      history.replace("/");
     } catch (err) {
       if (!err?.response) {
         setErrMsg('No Server Response');
